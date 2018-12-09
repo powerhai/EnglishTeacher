@@ -14,8 +14,8 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="english_teacher_app"
-        android:icon="@mipmap/ic_launcher">
+        android:label="百分百提分"
+        android:icon="@mipmap/running">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

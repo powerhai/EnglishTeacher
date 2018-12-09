@@ -174,7 +174,7 @@ class _RealRichRenderParagraph extends RenderParagraph {
       textOffset += text.toPlainText().length;
     } else {
       text.children.forEach((t) {
-        textOffset = miningOffset(bounds, text, textOffset);
+        textOffset = miningOffset(bounds, t, textOffset);
       });
     }
 
@@ -184,7 +184,7 @@ class _RealRichRenderParagraph extends RenderParagraph {
   void collectOffset(TextSpan span, Offset offset) {
     var wspan = span as WordTextSpan;
     if (wspan?.id != null) {
-      controller.save(wspan.id, offset.dy);
+      controller.addOffset(wspan.id, offset.dy);
     }
   }
 
@@ -204,7 +204,7 @@ class _RealRichRenderParagraph extends RenderParagraph {
             bounds,
           );
           if (w2.id != null) {
-            controller.save(w2.id, offsetForCaret1.dy);
+            controller.addOffset(w2.id, offsetForCaret1.dy);
           }
           textOffset += w2.toPlainText().length;
         });
@@ -215,7 +215,7 @@ class _RealRichRenderParagraph extends RenderParagraph {
         );
 
         if (w.id != null) {
-          controller.save(w.id, offsetForCaret2.dy);
+          controller.addOffset(w.id, offsetForCaret2.dy);
         }
         textOffset += ts.toPlainText().length;
       }
@@ -242,7 +242,8 @@ class WordTextSpan extends TextSpan {
 class WordOffsetsController {
   Map<String, double> offsets = {};
   WordOffsetsController();
-  void save(String id, double offset) {
+  
+  void addOffset(String id, double offset) {
     offsets.addAll({id: offset});
   }
 
